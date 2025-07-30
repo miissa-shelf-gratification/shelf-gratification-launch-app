@@ -1,1 +1,1209 @@
-https://teams.microsoft.com/l/meetup-join/19%3ameeting_MWZlYTM3MmUtMDQwMi00Yjc1LWJjMGYtYTE5MTIxZGRlYzFi%40thread.v2/0?context=%7b%22Tid%22%3a%225a36aa38-b2fa-4d32-a5e7-baca72ca510f%22%2c%22Oid%22%3a%22189b7553-8daa-4f23-aac4-dff8472d2f3b%22%7d
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shelf Gratification Launch Companion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Comfortaa:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bubblegum-pink: #FFB6D9;
+            --lavender-dream: #D7A9F9;
+            --mint-fresh: #A8E6CF;
+            --sunshine-yellow: #FFD93D;
+            --cherry-pop: #FF6B98;
+            --deep-purple: #6B46C1;
+            --text-dark: #2D3748;
+            --white: #FFFFFF;
+            --cream: #FFF8E7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comfortaa', sans-serif;
+            background: linear-gradient(135deg, var(--cream) 0%, #F0F8FF 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--cherry-pop), var(--lavender-dream));
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(255, 107, 152, 0.3);
+        }
+
+        .header h1 {
+            font-family: 'Fredoka', cursive;
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: var(--mint-fresh);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-family: 'Fredoka', cursive;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-dark);
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: var(--cherry-pop);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 107, 152, 0.3);
+        }
+
+        .section {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            border: 3px solid var(--bubblegum-pink);
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section h2 {
+            font-family: 'Fredoka', cursive;
+            color: var(--cherry-pop);
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .date-selector {
+            background: var(--sunshine-yellow);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .date-selector h3 {
+            font-family: 'Fredoka', cursive;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .date-input {
+            font-family: 'Comfortaa', sans-serif;
+            font-size: 16px;
+            padding: 10px 15px;
+            border: 2px solid var(--cherry-pop);
+            border-radius: 10px;
+            margin: 0 10px;
+        }
+
+        .current-day-card {
+            background: linear-gradient(135deg, var(--bubblegum-pink), var(--lavender-dream));
+            color: white;
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 6px 25px rgba(255, 182, 217, 0.4);
+        }
+
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .day-title {
+            font-family: 'Fredoka', cursive;
+            font-size: 22px;
+        }
+
+        .day-status {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .task-list {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .task-item {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--text-dark);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 12px;
+            border-left: 5px solid var(--mint-fresh);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .task-item.completed {
+            opacity: 0.7;
+            border-left-color: var(--sunshine-yellow);
+        }
+
+        .task-item.completed .task-text {
+            text-decoration: line-through;
+        }
+
+        .task-checkbox {
+            margin-top: 2px;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+
+        .task-content {
+            flex: 1;
+        }
+
+        .task-text {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .task-detail {
+            font-size: 12px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .time-estimate {
+            color: var(--deep-purple);
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .tomorrow-preview {
+            background: var(--mint-fresh);
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 15px;
+            color: var(--text-dark);
+        }
+
+        .tomorrow-preview h4 {
+            font-family: 'Fredoka', cursive;
+            margin-bottom: 8px;
+        }
+
+        .notes-section {
+            margin-top: 20px;
+        }
+
+        .notes-section h4 {
+            font-family: 'Fredoka', cursive;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .notes-textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: 15px;
+            border: 2px solid var(--bubblegum-pink);
+            border-radius: 12px;
+            font-family: 'Comfortaa', sans-serif;
+            resize: vertical;
+            margin-bottom: 10px;
+        }
+
+        .progress-timeline {
+            margin: 30px 0;
+        }
+
+        .workstream {
+            margin-bottom: 25px;
+        }
+
+        .workstream-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .workstream-title {
+            font-family: 'Fredoka', cursive;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+
+        .workstream-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .timeline-bar {
+            height: 20px;
+            background: #E2E8F0;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .timeline-progress {
+            height: 100%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .timeline-days {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 10px;
+            color: #666;
+        }
+
+        .reference-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .reference-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid var(--lavender-dream);
+        }
+
+        .reference-card h3 {
+            font-family: 'Fredoka', cursive;
+            color: var(--cherry-pop);
+            margin-bottom: 15px;
+        }
+
+        .color-swatch {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin: 5px;
+            border: 2px solid white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .reference-item {
+            margin: 8px 0;
+            padding: 8px;
+            background: var(--cream);
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .quick-actions {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .action-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .chat-btn {
+            background: var(--cherry-pop);
+            color: white;
+        }
+
+        .export-btn {
+            background: var(--sunshine-yellow);
+            color: var(--text-dark);
+        }
+
+        .celebration {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .close-modal {
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--cherry-pop);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .main-nav {
+                justify-content: center;
+            }
+            
+            .nav-btn {
+                flex: 1;
+                min-width: 120px;
+            }
+            
+            .quick-actions {
+                bottom: 10px;
+                right: 10px;
+            }
+            
+            .day-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🌈 Shelf Gratification Launch Companion 📚</h1>
+        <p>Your 90-Day Journey to Bookish Business Success</p>
+    </div>
+
+    <div class="container">
+        <nav class="main-nav">
+            <button class="nav-btn active" data-section="today">📅 Today's Tasks</button>
+            <button class="nav-btn" data-section="progress">📊 Progress Timeline</button>
+            <button class="nav-btn" data-section="reference">📖 Brand Reference</button>
+            <button class="nav-btn" data-section="setup">⚙️ Setup & Export</button>
+        </nav>
+
+        <!-- Today's Tasks Section -->
+        <div id="today" class="section active">
+            <div class="date-selector">
+                <h3>📅 Launch Day Calculator</h3>
+                <label>Launch Start Date (June 1, 2025):</label>
+                <input type="date" id="startDate" class="date-input" value="2025-06-01">
+                <label>Today's Date:</label>
+                <input type="date" id="currentDate" class="date-input">
+                <button class="nav-btn" onclick="calculateDay()">Calculate Day</button>
+            </div>
+
+            <div class="current-day-card" id="dayCard">
+                <div class="day-header">
+                    <div class="day-title">Day 1 - Monday: Brand & Platform Setup</div>
+                    <div class="day-status">⏰ 2.5 hours</div>
+                </div>
+                
+                <ul class="task-list" id="taskList">
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox" onchange="toggleTask(this, 0)">
+                        <div class="task-content">
+                            <div class="task-text">Implement whimsical color palette across existing materials</div>
+                            <div class="task-detail">Use the Whimsical Wonder palette: Bubblegum Pink (#FFB6D9), Lavender Dream (#D7A9F9), Mint Fresh (#A8E6CF), Sunshine Yellow (#FFD93D), Cherry Pop (#FF6B98)</div>
+                        </div>
+                        <span class="time-estimate">45 min</span>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox" onchange="toggleTask(this, 1)">
+                        <div class="task-content">
+                            <div class="task-text">Set up Make.com account (free tier)</div>
+                            <div class="task-detail">Go to make.com, create account, explore the interface. This will be your automation hub.</div>
+                        </div>
+                        <span class="time-estimate">30 min</span>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox" onchange="toggleTask(this, 2)">
+                        <div class="task-content">
+                            <div class="task-text">Get ChatGPT API key (platform.openai.com → API Keys)</div>
+                            <div class="task-detail">Essential for content automation. Add $10 credit for API usage.</div>
+                        </div>
+                        <span class="time-estimate">15 min</span>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox" onchange="toggleTask(this, 3)">
+                        <div class="task-content">
+                            <div class="task-text">Add $10 to OpenAI account for API credits</div>
+                            <div class="task-detail">Needed for automated content generation workflows.</div>
+                        </div>
+                        <span class="time-estimate">10 min</span>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox" onchange="toggleTask(this, 4)">
+                        <div class="task-content">
+                            <div class="task-text">Document setup process and save all login credentials</div>
+                            <div class="task-detail">Keep secure record of all accounts and passwords. Use password manager.</div>
+                        </div>
+                        <span class="time-estimate">20 min</span>
+                    </li>
+                </ul>
+
+                <div class="tomorrow-preview">
+                    <h4>🔮 Tomorrow's Preview: Social Media Foundation + Lemon8 Early Adoption</h4>
+                    <p><strong>Prep needed:</strong> Have Instagram login ready, think about inclusive bio messaging focusing on 'Reading looks different for everyone - we celebrate ALL readers!'</p>
+                </div>
+
+                <div class="notes-section">
+                    <h4>📝 Today's Notes</h4>
+                    <textarea class="notes-textarea" id="dayNotes" placeholder="Add your notes, thoughts, or questions about today's tasks..."></textarea>
+                    <button class="nav-btn" onclick="saveNotes()">Save Notes</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Timeline Section -->
+        <div id="progress" class="section">
+            <h2>📊 Your Progress Timeline</h2>
+            <div class="progress-timeline">
+                <div class="workstream">
+                    <div class="workstream-header">
+                        <div class="workstream-icon" style="background: var(--bubblegum-pink);">🎨</div>
+                        <div class="workstream-title">Brand & Content</div>
+                    </div>
+                    <div class="timeline-bar">
+                        <div class="timeline-progress" data-workstream="brand" style="width: 5%; background: var(--bubblegum-pink);"></div>
+                    </div>
+                    <div class="timeline-days">
+                        <span>Day 1</span>
+                        <span>Day 15</span>
+                        <span>Day 30</span>
+                        <span>Day 45</span>
+                        <span>Day 60</span>
+                        <span>Day 75</span>
+                        <span>Day 90</span>
+                    </div>
+                </div>
+
+                <div class="workstream">
+                    <div class="workstream-header">
+                        <div class="workstream-icon" style="background: var(--mint-fresh);">🤖</div>
+                        <div class="workstream-title">Automation & Tools</div>
+                    </div>
+                    <div class="timeline-bar">
+                        <div class="timeline-progress" data-workstream="automation" style="width: 3%; background: var(--mint-fresh);"></div>
+                    </div>
+                    <div class="timeline-days">
+                        <span>Day 1</span>
+                        <span>Day 15</span>
+                        <span>Day 30</span>
+                        <span>Day 45</span>
+                        <span>Day 60</span>
+                        <span>Day 75</span>
+                        <span>Day 90</span>
+                    </div>
+                </div>
+
+                <div class="workstream">
+                    <div class="workstream-header">
+                        <div class="workstream-icon" style="background: var(--sunshine-yellow);">🛍️</div>
+                        <div class="workstream-title">Platform & Sales</div>
+                    </div>
+                    <div class="timeline-bar">
+                        <div class="timeline-progress" data-workstream="platform" style="width: 2%; background: var(--sunshine-yellow);"></div>
+                    </div>
+                    <div class="timeline-days">
+                        <span>Day 1</span>
+                        <span>Day 15</span>
+                        <span>Day 30</span>
+                        <span>Day 45</span>
+                        <span>Day 60</span>
+                        <span>Day 75</span>
+                        <span>Day 90</span>
+                    </div>
+                </div>
+
+                <div class="workstream">
+                    <div class="workstream-header">
+                        <div class="workstream-icon" style="background: var(--lavender-dream);">💖</div>
+                        <div class="workstream-title">Inclusive Community</div>
+                    </div>
+                    <div class="timeline-bar">
+                        <div class="timeline-progress" data-workstream="community" style="width: 4%; background: var(--lavender-dream);"></div>
+                    </div>
+                    <div class="timeline-days">
+                        <span>Day 1</span>
+                        <span>Day 15</span>
+                        <span>Day 30</span>
+                        <span>Day 45</span>
+                        <span>Day 60</span>
+                        <span>Day 75</span>
+                        <span>Day 90</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Brand Reference Section -->
+        <div id="reference" class="section">
+            <h2>📖 Brand Reference Library</h2>
+            <div class="reference-grid">
+                <div class="reference-card">
+                    <h3>🎨 Whimsical Wonder Color Palette</h3>
+                    <div>
+                        <div class="color-swatch" style="background: #FFB6D9;" title="Bubblegum Pink"></div>
+                        <div class="color-swatch" style="background: #D7A9F9;" title="Lavender Dream"></div>
+                        <div class="color-swatch" style="background: #A8E6CF;" title="Mint Fresh"></div>
+                        <div class="color-swatch" style="background: #FFD93D;" title="Sunshine Yellow"></div>
+                        <div class="color-swatch" style="background: #FF6B98;" title="Cherry Pop"></div>
+                    </div>
+                    <div class="reference-item"><strong>Bubblegum Pink:</strong> #FFB6D9</div>
+                    <div class="reference-item"><strong>Lavender Dream:</strong> #D7A9F9</div>
+                    <div class="reference-item"><strong>Mint Fresh:</strong> #A8E6CF</div>
+                    <div class="reference-item"><strong>Sunshine Yellow:</strong> #FFD93D</div>
+                    <div class="reference-item"><strong>Cherry Pop:</strong> #FF6B98</div>
+                </div>
+
+                <div class="reference-card">
+                    <h3>✏️ Brand Fonts</h3>
+                    <div class="reference-item"><strong>Primary:</strong> Fredoka (headings, fun text)</div>
+                    <div class="reference-item"><strong>Secondary:</strong> Comfortaa (body text)</div>
+                    <div class="reference-item"><strong>Accent:</strong> Caveat (handwritten feel)</div>
+                    <div class="reference-item"><strong>Google Fonts URLs:</strong> fonts.googleapis.com</div>
+                </div>
+
+                <div class="reference-card">
+                    <h3>🏷️ Brand Voice & Messaging</h3>
+                    <div class="reference-item"><strong>Tagline:</strong> "Where Every Reader Belongs"</div>
+                    <div class="reference-item"><strong>Core Message:</strong> Format-inclusive, whimsical joy</div>
+                    <div class="reference-item"><strong>Hashtags:</strong> #AllFormatsWelcome #ShelfGratificationForAll</div>
+                    <div class="reference-item"><strong>Tone:</strong> Celebratory, Solution-focused, Joyful</div>
+                </div>
+
+                <div class="reference-card">
+                    <h3>🛠️ Essential Tools</h3>
+                    <div class="reference-item"><strong>Automation:</strong> Make.com</div>
+                    <div class="reference-item"><strong>AI Content:</strong> ChatGPT Plus</div>
+                    <div class="reference-item"><strong>Design:</strong> Canva Pro</div>
+                    <div class="reference-item"><strong>Social:</strong> Instagram, Pinterest, Lemon8</div>
+                    <div class="reference-item"><strong>Sales:</strong> Etsy → Amazon → Shopify</div>
+                </div>
+
+                <div class="reference-card">
+                    <h3>🎯 Target Keywords</h3>
+                    <div class="reference-item"><strong>Golden Tags:</strong> format fluid reader, reading accessibility</div>
+                    <div class="reference-item"><strong>High-Demand:</strong> kindle aesthetic kit, tbr overwhelm help</div>
+                    <div class="reference-item"><strong>Inclusive:</strong> all format reader, inclusive reading</div>
+                    <div class="reference-item"><strong>Niche:</strong> reading anxiety support, book slump recovery</div>
+                </div>
+
+                <div class="reference-card">
+                    <h3>📞 Contact & Links</h3>
+                    <div class="reference-item"><strong>Email:</strong> milissa.d.campbell@gmail.com</div>
+                    <div class="reference-item"><strong>Phone:</strong> 817-480-5662</div>
+                    <div class="reference-item"><strong>Etsy:</strong> etsy.com/shop/shelfgratification</div>
+                    <div class="reference-item"><strong>Chat with Claude:</strong> claude.ai</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Setup & Export Section -->
+        <div id="setup" class="section">
+            <h2>⚙️ Setup & Export Tools</h2>
+            
+            <div class="reference-card">
+                <h3>📧 Email Reminder Setup</h3>
+                <p>Copy this template to set up daily email reminders:</p>
+                <textarea readonly style="width: 100%; height: 150px; margin: 10px 0; padding: 15px; border-radius: 10px;">
+Subject: 🌈 Shelf Gratification Day [X] Tasks - [Date]
+
+Hi Milissa! 📚✨
+
+Today is Day [X] of your Shelf Gratification launch journey!
+
+[TASK DETAILS FROM APP]
+
+Tomorrow's Preview: [NEXT DAY PREVIEW]
+
+You've got this! 💪
+Your Launch Companion App
+                </textarea>
+                <p><strong>Setup Instructions:</strong> Use tools like Zapier, IFTTT, or Google Calendar with email notifications to send daily reminders using this template.</p>
+            </div>
+
+            <div class="reference-card">
+                <h3>📱 SMS Reminder Setup</h3>
+                <p>Text reminder template:</p>
+                <textarea readonly style="width: 100%; height: 100px; margin: 10px 0; padding: 15px; border-radius: 10px;">
+🌈 Shelf Gratification Day [X]: [BRIEF TASK SUMMARY] - Est. [TIME]. Check app for details! You're [X]% through your launch journey! 📚✨
+                </textarea>
+                <p><strong>Setup Instructions:</strong> Use services like Twilio, TextMagic, or IFTTT to automate SMS reminders.</p>
+            </div>
+
+            <div class="reference-card">
+                <h3>💾 Export Your Progress</h3>
+                <button onclick="exportProgress()" class="nav-btn">📤 Export Progress Report</button>
+                <button onclick="exportNotes()" class="nav-btn">📝 Export All Notes</button>
+                <button onclick="backupData()" class="nav-btn">💾 Backup App Data</button>
+                <p style="margin-top: 15px; font-size: 14px; color: #666;">
+                    <strong>Note:</strong> If running locally, data is only saved for this session. Use export functions to save your progress permanently!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Action Buttons -->
+    <div class="quick-actions">
+        <button class="action-btn chat-btn" onclick="openChatModal()" title="Chat with Claude">💬</button>
+        <button class="action-btn export-btn" onclick="exportDay()" title="Export Today">📤</button>
+    </div>
+
+    <!-- Celebration Animation -->
+    <div class="celebration" id="celebration">🎉</div>
+
+    <!-- Chat Modal -->
+    <div id="chatModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeChatModal()">&times;</span>
+            <h3>💬 Need Help? Chat with Claude!</h3>
+            <p>Click the link below to continue our conversation:</p>
+            <a href="https://claude.ai" target="_blank" style="color: var(--cherry-pop); font-weight: 600; text-decoration: none; font-size: 18px;">
+                🚀 Open Claude.ai
+            </a>
+            <p style="margin-top: 20px; font-size: 14px; color: #666;">
+                💡 <strong>Pro Tip:</strong> Reference "Shelf Gratification 90-day launch" in your message to continue our conversation seamlessly!
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Sample task data for the full 90-day calendar
+        const taskData = {
+            1: {
+                title: "Day 1 - Monday: Brand & Platform Setup + Inclusive Brand Launch",
+                time: "2.5 hours",
+                tasks: [
+                    { text: "Implement whimsical color palette across existing materials", time: "45 min", detail: "Use the Whimsical Wonder palette: Bubblegum Pink (#FFB6D9), Lavender Dream (#D7A9F9), Mint Fresh (#A8E6CF), Sunshine Yellow (#FFD93D), Cherry Pop (#FF6B98)" },
+                    { text: "Set up Make.com account (free tier)", time: "30 min", detail: "Go to make.com, create account, explore the interface. This will be your automation hub." },
+                    { text: "Get ChatGPT API key (platform.openai.com → API Keys)", time: "15 min", detail: "Essential for content automation. Add $10 credit for API usage." },
+                    { text: "Add $10 to OpenAI account for API credits", time: "10 min", detail: "Needed for automated content generation workflows." },
+                    { text: "Document setup process and save all login credentials", time: "20 min", detail: "Keep secure record of all accounts and passwords. Use password manager." }
+                ],
+                tomorrow: {
+                    title: "Social Media Foundation + Lemon8 Early Adoption",
+                    prep: "Have Instagram login ready, think about inclusive bio messaging focusing on 'Reading looks different for everyone - we celebrate ALL readers!'"
+                }
+            },
+            2: {
+                title: "Day 2 - Tuesday: Social Media Foundation + Lemon8 Early Adoption",
+                time: "2.5 hours",
+                tasks: [
+                    { text: "Convert Instagram to Business Account", time: "20 min", detail: "Essential for Instagram Shopping and analytics access" },
+                    { text: "Set up Instagram Shopping", time: "40 min", detail: "Connect to Facebook catalog for product tagging" },
+                    { text: "Create Pinterest Business account", time: "30 min", detail: "Focus on inclusive reading and accessibility boards" },
+                    { text: "Download Lemon8 app and create account - PRIORITY for early adoption", time: "20 min", detail: "TikTok's sister app - get in early before competition discovers it" },
+                    { text: "Research Lemon8 bookish community and optimal posting times", time: "15 min", detail: "Find bookish creators to follow and engagement patterns" },
+                    { text: "Optimize all bio sections with whimsical branding and inclusive messaging", time: "15 min", detail: "Use 'Where Every Reader Belongs' messaging across platforms" }
+                ],
+                tomorrow: {
+                    title: "Content Preparation + Inclusive Brand Launch",
+                    prep: "Prepare for first Instagram post focusing on inclusive brand introduction. Think about diverse reading scenarios to photograph."
+                }
+            },
+            3: {
+                title: "Day 3 - Wednesday: Content Preparation + Inclusive Brand Launch",
+                time: "3 hours",
+                tasks: [
+                    { text: "Create first foundation Instagram post (Post #1: Inclusive Brand Introduction)", time: "90 min", detail: "Focus: 'Reading looks different for everyone - we celebrate ALL readers!'" },
+                    { text: "Set up Canva Pro account", time: "20 min", detail: "Essential for professional design work" },
+                    { text: "Create 3 Canva templates using whimsical color palette + inclusive messaging", time: "45 min", detail: "Templates for regular use across platforms" },
+                    { text: "Plan first week's posting schedule with inclusive content themes", time: "25 min", detail: "Map out content calendar with inclusive messaging" }
+                ],
+                tomorrow: {
+                    title: "Etsy Optimization Begin",
+                    prep: "Review current Etsy listings and prepare for optimization work. Have product photos ready for updates."
+                }
+            }
+            // Add more days as needed...
+        };
+
+        let currentDay = 1;
+        let completedTasks = {};
+        let dailyNotes = {};
+
+        // Storage helper functions with fallback
+        let storageAvailable = false;
+
+        // Check if localStorage is available
+        function checkStorageAvailability() {
+            try {
+                const test = '__storage_test__';
+                localStorage.setItem(test, test);
+                localStorage.removeItem(test);
+                storageAvailable = true;
+                return true;
+            } catch(e) {
+                storageAvailable = false;
+                console.log('localStorage not available - using session memory only');
+                return false;
+            }
+        }
+
+        // Load data from localStorage (with fallback)
+        function loadStoredData() {
+            if (!storageAvailable) return;
+            
+            try {
+                const stored = localStorage.getItem('shelfGratificationData');
+                if (stored) {
+                    const data = JSON.parse(stored);
+                    completedTasks = data.completedTasks || {};
+                    dailyNotes = data.dailyNotes || {};
+                }
+            } catch (e) {
+                console.log('Could not load stored data:', e.message);
+            }
+        }
+
+        // Save data to localStorage (with fallback)
+        function saveStoredData() {
+            if (!storageAvailable) return;
+            
+            try {
+                const data = {
+                    completedTasks,
+                    dailyNotes,
+                    lastUpdated: new Date().toISOString()
+                };
+                localStorage.setItem('shelfGratificationData', JSON.stringify(data));
+            } catch (e) {
+                console.log('Could not save data:', e.message);
+            }
+        }
+
+        // Show section function
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            const targetSection = document.getElementById(sectionName);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+            
+            // Update nav buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Find the clicked button and make it active
+            const clickedBtn = document.querySelector(`[data-section="${sectionName}"]`);
+            if (clickedBtn) {
+                clickedBtn.classList.add('active');
+            }
+        }
+
+        // Calculate day function
+        function calculateDay() {
+            const startDateInput = document.getElementById('startDate');
+            const currentDateInput = document.getElementById('currentDate');
+            
+            if (!startDateInput || !currentDateInput) return;
+            
+            const startDate = new Date(startDateInput.value);
+            const currentDate = new Date(currentDateInput.value);
+            const timeDiff = currentDate.getTime() - startDate.getTime();
+            const dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24)) + 1;
+            
+            if (dayDiff > 0 && dayDiff <= 90) {
+                currentDay = dayDiff;
+                loadDay(currentDay);
+            } else if (dayDiff <= 0) {
+                alert('🚀 Launch hasn\'t started yet! Get ready for the big day!');
+            } else {
+                alert('🎉 Congratulations! You\'ve completed your 90-day launch journey!');
+            }
+        }
+
+        // Load day function
+        function loadDay(day) {
+            const dayData = taskData[day];
+            const dayCard = document.getElementById('dayCard');
+            
+            if (!dayCard) return;
+            
+            if (!dayData) {
+                dayCard.innerHTML = `
+                    <div class="day-header">
+                        <div class="day-title">Day ${day} - Continue Your Journey!</div>
+                        <div class="day-status">⏰ Check Calendar</div>
+                    </div>
+                    <p>Refer to your 90-day calendar for today's specific tasks. This day isn't loaded in the sample data yet.</p>
+                    <div class="notes-section">
+                        <h4>📝 Today's Notes</h4>
+                        <textarea class="notes-textarea" id="dayNotes" placeholder="Add your notes about today's tasks...">${dailyNotes[day] || ''}</textarea>
+                        <button class="nav-btn" onclick="saveNotes()">Save Notes</button>
+                    </div>
+                `;
+                return;
+            }
+
+            const completedToday = completedTasks[day] || [];
+            const taskListHTML = dayData.tasks.map((task, index) => `
+                <li class="task-item ${completedToday.includes(index) ? 'completed' : ''}">
+                    <input type="checkbox" class="task-checkbox" 
+                           ${completedToday.includes(index) ? 'checked' : ''} 
+                           onchange="toggleTask(this, ${index})">
+                    <div class="task-content">
+                        <div class="task-text">${task.text}</div>
+                        ${task.detail ? `<div class="task-detail">${task.detail}</div>` : ''}
+                    </div>
+                    <span class="time-estimate">${task.time}</span>
+                </li>
+            `).join('');
+
+            dayCard.innerHTML = `
+                <div class="day-header">
+                    <div class="day-title">${dayData.title}</div>
+                    <div class="day-status">⏰ ${dayData.time}</div>
+                </div>
+                
+                <ul class="task-list">
+                    ${taskListHTML}
+                </ul>
+
+                <div class="tomorrow-preview">
+                    <h4>🔮 Tomorrow's Preview: ${dayData.tomorrow.title}</h4>
+                    <p><strong>Prep needed:</strong> ${dayData.tomorrow.prep}</p>
+                </div>
+
+                <div class="notes-section">
+                    <h4>📝 Today's Notes</h4>
+                    <textarea class="notes-textarea" id="dayNotes" placeholder="Add your notes, thoughts, or questions about today's tasks...">${dailyNotes[day] || ''}</textarea>
+                    <button class="nav-btn" onclick="saveNotes()">Save Notes</button>
+                </div>
+            `;
+
+            updateProgress();
+        }
+
+        // Toggle task function
+        function toggleTask(checkbox, taskIndex) {
+            if (!completedTasks[currentDay]) {
+                completedTasks[currentDay] = [];
+            }
+
+            if (checkbox.checked) {
+                if (!completedTasks[currentDay].includes(taskIndex)) {
+                    completedTasks[currentDay].push(taskIndex);
+                    showCelebration();
+                }
+                checkbox.closest('.task-item').classList.add('completed');
+            } else {
+                completedTasks[currentDay] = completedTasks[currentDay].filter(i => i !== taskIndex);
+                checkbox.closest('.task-item').classList.remove('completed');
+            }
+
+            saveStoredData();
+            updateProgress();
+        }
+
+        // Show celebration function
+        function showCelebration() {
+            const celebration = document.getElementById('celebration');
+            if (!celebration) return;
+            
+            const celebrationEmojis = ['🎉', '✨', '🌟', '🎊', '💫', '🙌', '🎈'];
+            celebration.textContent = celebrationEmojis[Math.floor(Math.random() * celebrationEmojis.length)];
+            celebration.style.opacity = '1';
+            celebration.style.transform = 'translate(-50%, -50%) scale(1.5)';
+            
+            setTimeout(() => {
+                celebration.style.opacity = '0';
+                celebration.style.transform = 'translate(-50%, -50%) scale(1)';
+            }, 2000);
+        }
+
+        // Save notes function
+        function saveNotes() {
+            const notesTextarea = document.getElementById('dayNotes');
+            if (!notesTextarea) return;
+            
+            const notes = notesTextarea.value;
+            dailyNotes[currentDay] = notes;
+            saveStoredData();
+            
+            // Show feedback
+            const buttons = document.querySelectorAll('.nav-btn');
+            const saveButton = Array.from(buttons).find(btn => btn.textContent.includes('Save Notes'));
+            if (saveButton) {
+                const originalText = saveButton.textContent;
+                const originalBg = saveButton.style.background;
+                saveButton.textContent = '✅ Saved!';
+                saveButton.style.background = '#A8E6CF';
+                
+                setTimeout(() => {
+                    saveButton.textContent = originalText;
+                    saveButton.style.background = originalBg;
+                }, 2000);
+            }
+        }
+
+        // Update progress function
+        function updateProgress() {
+            const totalTasks = Object.keys(taskData).reduce((sum, day) => sum + taskData[day].tasks.length, 0);
+            const completedTasksCount = Object.keys(completedTasks).reduce((sum, day) => 
+                sum + (completedTasks[day] ? completedTasks[day].length : 0), 0);
+            
+            const progressPercentage = Math.round((currentDay / 90) * 100);
+            const completionPercentage = totalTasks > 0 ? Math.round((completedTasksCount / totalTasks) * 100) : 0;
+            
+            // Update progress bars
+            document.querySelectorAll('[data-workstream]').forEach((bar, index) => {
+                const workstreamProgress = Math.max(progressPercentage + (index * 2 - 2), completionPercentage);
+                bar.style.width = Math.min(workstreamProgress, 100) + '%';
+            });
+        }
+
+        // Modal functions
+        function openChatModal() {
+            const modal = document.getElementById('chatModal');
+            if (modal) modal.style.display = 'block';
+        }
+
+        function closeChatModal() {
+            const modal = document.getElementById('chatModal');
+            if (modal) modal.style.display = 'none';
+        }
+
+        // Export functions
+        function exportDay() {
+            const dayData = taskData[currentDay];
+            if (!dayData) return;
+
+            const exportText = `
+📅 SHELF GRATIFICATION LAUNCH - DAY ${currentDay}
+📧 Email: milissa.d.campbell@gmail.com
+📱 SMS: 817-480-5662
+
+🎯 TODAY'S FOCUS: ${dayData.title}
+⏰ Time Estimate: ${dayData.time}
+
+📋 TASKS:
+${dayData.tasks.map((task, i) => `
+${completedTasks[currentDay]?.includes(i) ? '✅' : '⭐'} ${task.text} (${task.time})
+   ${task.detail ? '💡 ' + task.detail : ''}
+`).join('')}
+
+🔮 TOMORROW'S PREVIEW: ${dayData.tomorrow.title}
+🎯 Prep Needed: ${dayData.tomorrow.prep}
+
+📝 MY NOTES:
+${dailyNotes[currentDay] || 'No notes added yet.'}
+
+Generated by Shelf Gratification Launch Companion 🌈📚
+            `;
+
+            downloadFile(exportText, `ShelfGratification-Day${currentDay}-${new Date().toISOString().split('T')[0]}.txt`);
+        }
+
+        function exportProgress() {
+            const totalDays = 90;
+            const completedDays = Object.keys(completedTasks).length;
+            const totalTasks = Object.keys(taskData).reduce((sum, day) => sum + taskData[day].tasks.length, 0);
+            const completedTasksTotal = Object.keys(completedTasks).reduce((sum, day) => 
+                sum + (completedTasks[day] ? completedTasks[day].length : 0), 0);
+
+            const progressReport = `
+🌈 SHELF GRATIFICATION LAUNCH PROGRESS REPORT
+Generated: ${new Date().toLocaleDateString()}
+
+📊 OVERALL PROGRESS:
+• Current Day: ${currentDay} of 90 (${Math.round((currentDay/90)*100)}%)
+• Days with Activity: ${completedDays}
+• Tasks Completed: ${completedTasksTotal} of ${totalTasks}
+• Completion Rate: ${totalTasks > 0 ? Math.round((completedTasksTotal/totalTasks)*100) : 0}%
+
+🎯 WORKSTREAM BREAKDOWN:
+🎨 Brand & Content: ${Math.min(Math.round((currentDay/90)*100) + 2, 100)}%
+🤖 Automation & Tools: ${Math.min(Math.round((currentDay/90)*100), 100)}%
+🛍️ Platform & Sales: ${Math.min(Math.round((currentDay/90)*100) - 1, 100)}%
+💖 Inclusive Community: ${Math.min(Math.round((currentDay/90)*100) + 1, 100)}%
+
+📝 NOTES SUMMARY:
+${Object.keys(dailyNotes).map(day => 
+    `Day ${day}: ${dailyNotes[day] ? dailyNotes[day].substring(0, 100) + '...' : 'No notes'}`
+).join('\n')}
+
+🚀 NEXT STEPS:
+Continue following your daily tasks and building your inclusive bookish brand!
+
+Contact: milissa.d.campbell@gmail.com | 817-480-5662
+            `;
+
+            downloadFile(progressReport, `ShelfGratification-ProgressReport-${new Date().toISOString().split('T')[0]}.txt`);
+        }
+
+        function exportNotes() {
+            const notesExport = `
+📝 SHELF GRATIFICATION LAUNCH - ALL NOTES
+Generated: ${new Date().toLocaleDateString()}
+
+${Object.keys(dailyNotes).map(day => `
+=== DAY ${day} NOTES ===
+${dailyNotes[day] || 'No notes for this day.'}
+`).join('\n')}
+
+Total Days with Notes: ${Object.keys(dailyNotes).length}
+            `;
+
+            downloadFile(notesExport, `ShelfGratification-AllNotes-${new Date().toISOString().split('T')[0]}.txt`);
+        }
+
+        function backupData() {
+            const backupData = {
+                completedTasks: completedTasks,
+                dailyNotes: dailyNotes,
+                currentDay: currentDay,
+                backupDate: new Date().toISOString(),
+                version: '1.0'
+            };
+
+            downloadFile(JSON.stringify(backupData, null, 2), `ShelfGratification-Backup-${new Date().toISOString().split('T')[0]}.json`);
+        }
+
+        // Helper function to download files
+        function downloadFile(content, filename) {
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check storage availability first
+            checkStorageAvailability();
+            
+            // Show storage status in header
+            const header = document.querySelector('.header p');
+            if (header && !storageAvailable) {
+                header.innerHTML = 'Your 90-Day Journey to Bookish Business Success<br><small style="opacity: 0.8;">📝 Session mode - use export functions to save progress permanently</small>';
+            }
+            
+            // Load stored data (if available)
+            loadStoredData();
+            
+            // Set today's date
+            const today = new Date();
+            const todayInput = document.getElementById('currentDate');
+            if (todayInput) {
+                todayInput.value = today.toISOString().split('T')[0];
+            }
+            
+            // Set up navigation
+            document.querySelectorAll('[data-section]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const section = this.getAttribute('data-section');
+                    showSection(section);
+                });
+            });
+            
+            // Load initial day
+            loadDay(currentDay);
+            
+            // Update progress
+            updateProgress();
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                const modal = document.getElementById('chatModal');
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'e') {
+                e.preventDefault();
+                exportDay();
+            }
+            if (e.ctrlKey && e.key === 's') {
+                e.preventDefault();
+                saveNotes();
+            }
+        });
+    </script>
+</body>
+</html>
